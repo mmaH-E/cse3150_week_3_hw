@@ -12,14 +12,15 @@ void addStudent(char* name, double gpa, char* names[], double gpas[], int& size,
     if (size >= capacity){
         throw "List full";
     }
-    names[size] = name;
+    names[size] = new char[strlen(name) + 1];
+    strcpy(names[size], name);
     gpas[size] = gpa;
     size ++;
-
 }
 // TODO: implement updateGPA
 void updateGPA(double* gpaPtr, double newGpa){
-    if (gpaPtr != nullptr) *gpaPtr = newGpa;
+
+    *gpaPtr = newGpa;
 
 }
 // TODO: implement printStudent
@@ -67,7 +68,7 @@ int main(int argc, char* argv[]) {
             case 1: {
                 // TODO: implement menu logic
 
-                char buff[256];
+                char buff[100];
                 double gpa;
                 std::cout << "Enter the student's name: " << std::endl;
                 std::cin >> buff;
@@ -88,7 +89,10 @@ int main(int argc, char* argv[]) {
                 double newgpa;
                 std::cout << "enter the index of the student and their new gpa: " << std::endl;
                 std::cin >> idx >> newgpa;
-
+                if(idx >= size || idx < 0){
+                    std::cout << "Invalid index";
+                    break;
+                }
                 updateGPA(&gpas[idx], newgpa);
 
 
@@ -128,8 +132,6 @@ int main(int argc, char* argv[]) {
 
     // TODO: free memory
     for (int i = 0; i < size; i++) delete[] names[i];
-    delete[] names;
-    delete[] gpas;
 
     return 0;
 }
