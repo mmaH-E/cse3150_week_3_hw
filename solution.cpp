@@ -13,7 +13,7 @@ void addStudent(char* name, double gpa, char* names[], double gpas[], int& size,
         throw "List full";
     }
     names[size] = new char[strlen(name) + 1];
-    strcpy(names[size], name);
+    std::strcpy(names[size], name);
     gpas[size] = gpa;
     size ++;
 }
